@@ -52,7 +52,7 @@ angular.module('scrollsguidepostFrontendApp')
 				if (mins < 1) {
 					return ' <span class="hidden-phone">moments ago</span><span class="visible-phone">just now</span>';
 				}
-				return Math.round(mins) + ' <span class="hidden-phone">minutes ago</span><span class="visible-phone">min</span>';
+				return (Math.round(mins) + (Math.round(mins) === 1 ? ' <span class="hidden-phone">minute ago</span>' : ' <span class="hidden-phone">minutes ago</span>') + '<span class="visible-phone">min</span>');
 			}
 		};
 
