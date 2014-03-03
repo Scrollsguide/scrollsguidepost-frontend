@@ -1,5 +1,8 @@
 body {
-	background: url(/img/growth.jpg) no-repeat center center fixed; 
+	background-image: url(/img/growth.jpg);
+	background-repeat: no-repeat;
+	background-position: top center;
+	background-attachment: fixed; 
 }
 
 h1 {

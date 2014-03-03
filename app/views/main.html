@@ -129,6 +129,7 @@
 					<th>
 						<a ng-click="changeSorting('name')">Scroll</a>
 					</th>
+					<th class="resource hidden-phone">Cost</th>
 					<th>
 						<a ng-click="changeSorting('rarity')">
 							<span class="hidden-phone">Rarity</span>
@@ -149,6 +150,7 @@
 					<div class="card-image" id="simg-{{card.image}}"></div>
 				</td>
 				<td>{{card.name}}</td>
+				<td>{{card.costenergy}}</td>
 				<td ng-class="rarityClass(card.rarity)">
 					<span class="hidden-phone">{{rarityToText(card.rarity)}}</span>
 					<span class="visible-phone">{{rarityToText(card.rarity)[0]}}</span>

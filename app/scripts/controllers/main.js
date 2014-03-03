@@ -59,8 +59,7 @@ angular.module('scrollsguidepostFrontendApp')
 					card.price.details.forEach(function(detail) {
 						if (!lastSeen){
 							lastSeen = detail.time;
-						}
-						if (detail.time < lastSeen){
+						} else if (detail.time < lastSeen){
 							lastSeen = detail.time;
 						}
 					});
