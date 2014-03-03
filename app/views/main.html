@@ -150,7 +150,7 @@
 					<div class="card-image" id="simg-{{card.image}}"></div>
 				</td>
 				<td>{{card.name}}</td>
-				<td>{{card.costenergy}}</td>
+				<td ng-bind-html-unsafe="prettyCost(card)" class="card-cost"></td>
 				<td ng-class="rarityClass(card.rarity)">
 					<span class="hidden-phone">{{rarityToText(card.rarity)}}</span>
 					<span class="visible-phone">{{rarityToText(card.rarity)[0]}}</span>

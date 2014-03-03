@@ -98,6 +98,18 @@ angular.module('scrollsguidepostFrontendApp')
 			return (5 * Math.round(price / 5)) + 'g';
 		};
 
+		$scope.prettyCost = function(card){
+			var r = ['growth', 'order', 'energy', 'decay'];
+
+			for(var i = 0; i < r.length; i++){
+				var key = 'cost'+r[i];
+
+				if (card[key] > 0){
+					return card[key] + '<img src="/img/card-icons/' + r[i] + '.png" />';
+				}
+			}
+		};
+
 		$scope.sort = {
 			column: 'name',
 			descending: false

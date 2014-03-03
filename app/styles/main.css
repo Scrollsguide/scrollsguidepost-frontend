@@ -32,7 +32,6 @@ table.table-striped td.pop {
 	width: 15%;
 }
 
-
 .price-container tr {
 	cursor: pointer;
 }
@@ -50,9 +49,12 @@ table.table-striped td.pop {
 .price-container .btn.disabled {
 	cursor: pointer;
 }
-.price-container .btn img {
+.price-container .btn img, .card-cost img {
 	height: 20px;
 	margin-bottom: 0px;
+}
+.card-cost img {
+	margin-left: 5px;
 }
 
 /* Side Menu */
