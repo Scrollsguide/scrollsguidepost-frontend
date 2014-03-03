@@ -4,7 +4,7 @@ angular.module('scrollsguidepostFrontendApp')
 	.controller('MainCtrl', function($scope, cards, prices, priceDetails, $cookies) {
 		$scope.cards = cards.get();
 		$scope.prices = prices.get();
-		$scope.priceDetails = priceDetails.get();
+		$scope.priceDetails = priceDetails;
 
 		$scope.allCardData = [];
 		$scope.searchTerm = '';
@@ -14,28 +14,22 @@ angular.module('scrollsguidepostFrontendApp')
 			$scope.allCardData = [];
 			$scope.cards.cards.forEach(function(card) {
 				var newCard = angular.copy(card);
+
 				newCard.price = {
-					buy: 0,
-					sell: 0
+					buy: { price: 0, pop: 0},
+					sell: { price: 0, pop: 0}
 				};
+
 				$scope.prices.prices.forEach(function(priceData) {
 					if (priceData.id === card.id) {
 						newCard.price = priceData;
 					}
 				});
-				newCard.price.details = $scope.priceDetails.details[card.id] ? $scope.priceDetails.details[card.id] : null;
-				newCard.price.buyPop = 0;
-				newCard.price.sellPop = 0;
-				if ($scope.priceDetails.details[card.id]) {
-					$scope.priceDetails.details[card.id].forEach(function(offer) {
-						if (offer.type === 'SELL') {
-							newCard.price.sellPop++;
-						}
-						if (offer.type === 'BUY') {
-							newCard.price.buyPop++;
-						}
-					});
+
+				if (!$scope.setFilters[card.set]){
+					$scope.setFilters[card.set] = true;
 				}
+
 				$scope.allCardData.push(newCard);
 			});
 		}
@@ -57,8 +51,28 @@ angular.module('scrollsguidepostFrontendApp')
 		};
 
 		$scope.details = function(card) {
-			$scope.sidebarActive = true;
-			$scope.activeCard = card;
+			if (!card.price.details){
+				$scope.priceDetails.get(card.id).success(function(c){
+					card.price.details = c.data;
+
+					var lastSeen;
+					card.price.details.forEach(function(detail) {
+						if (!lastSeen){
+							lastSeen = detail.time;
+						}
+						if (detail.time < lastSeen){
+							lastSeen = detail.time;
+						}
+					});
+
+					card.price.lastseen = lastSeen;
+					$scope.activeCard = card;
+					$scope.sidebarActive = true;
+				});
+			} else {
+				$scope.activeCard = card;
+				$scope.sidebarActive = true;
+			}
 		};
 
 		$scope.prettyOfferType = function(offer) {
@@ -82,7 +96,7 @@ angular.module('scrollsguidepostFrontendApp')
 			if (!price) {
 				return '0g';
 			}
-			return price + 'g';
+			return (5 * Math.round(price / 5)) + 'g';
 		};
 
 		$scope.sort = {
@@ -141,6 +155,14 @@ angular.module('scrollsguidepostFrontendApp')
 			$scope.factionFilters[faction] = !$scope.factionFilters[faction];
 		};
 
+		$scope.setFilters = {};
+		$scope.cardSet = function(card){
+			return $scope.setFilters[card.set];
+		};
+		$scope.toggleSet = function(set){
+			$scope.setFilters[set] = !$scope.setFilters[set];
+		};
+
 		/*TODO this needs to be a directive*/
 		var el = document.getElementsByTagName('body')[0];
 		el.onkeydown = function(evt) {
@@ -157,7 +179,7 @@ angular.module('scrollsguidepostFrontendApp')
 			$('#theme-stylesheet').attr('href', '/styles-themes/theme-'+theme+'.css');
 			$cookies.theme = theme;
 		};
-		$scope.theme($cookies.theme || 'order');
+		$scope.theme($cookies.theme || 'energy');
 
 		$scope.$watch('cards.cards + prices.prices + priceDetails.details[1]', aggregate);
 	});

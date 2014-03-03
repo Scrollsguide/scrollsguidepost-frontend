@@ -12,7 +12,7 @@ h1 {
 	z-index: 100;
 }
 
-button.btn.first-faction {
+button.btn.first-button {
 	margin-left: 20px;
 }
 
@@ -109,11 +109,15 @@ table.table-striped td.pop {
 #sidebar-wrapper .flyout-container .card-image {
 	display: inline-block;
 }
+
+.rarity-Common {
+	color: #28A800;
+}
 .rarity-Uncommon {
 	color: #0b81ca;
 }
 .rarity-Rare {
-	color: #bf31da;
+	color: #CA0000;
 }
 
 .rarity-label {

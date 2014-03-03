@@ -34,9 +34,9 @@
 					</tr>
 				</thead>
 				<tr>
-					<td>{{prettyPrice(activeCard.price.buy)}}</td>
-					<td>{{prettyPrice(activeCard.price.sell)}}</td>
-					<td>{{activeCard.price.buyPop}} / {{activeCard.price.sellPop}}</td>
+					<td>{{prettyPrice(activeCard.price.buy.price)}}</td>
+					<td>{{prettyPrice(activeCard.price.sell.price)}}</td>
+					<td>{{activeCard.price.buy.pop}} / {{activeCard.price.sell.pop}}</td>
 					<td>
 						<span ng-bind-html-unsafe="dateFormat(activeCard.price.lastseen)"></span>
 					</td>
@@ -85,20 +85,29 @@
 	</div>
 	<div class="row-fluid price-container">
 		<div class="row-fluid">
-			<div class="span6">
+			<div class="span4">
 				<form class="form-search">
 					<input type="text" class="search-query input-block-level" placeholder="Search" ng-model="searchTerm"/>
 				</form>
 			</div>
-			<div class="span6 filter-btns">
-				<button class="btn rarity-Common" ng-click="toggleRarity(0)" ng-class="{disabled: !rarityFilters[0]}">C</button>
+			<div class="span8 filter-btns">
+				<button class="btn" ng-click="toggleSet(1)" ng-class="{disabled: !setFilters[1]}">1</button>
+				<button class="btn" ng-click="toggleSet(2)" ng-class="{disabled: !setFilters[2]}">2</button>
+				<button class="btn" ng-click="toggleSet(3)" ng-class="{disabled: !setFilters[3]}">3</button>
+				<button class="btn" ng-click="toggleSet(4)" ng-class="{disabled: !setFilters[4]}">4</button>
+				<button class="btn" ng-click="toggleSet(5)" ng-class="{disabled: !setFilters[5]}">5</button>
+			
+				<br class="small-phone" />
+				<br class="small-phone" />
+				
+				<button class="btn rarity-Common first-button" ng-click="toggleRarity(0)" ng-class="{disabled: !rarityFilters[0]}">C</button>
 				<button class="btn rarity-Uncommon" ng-click="toggleRarity(1)" ng-class="{disabled: !rarityFilters[1]}">U</button>
 				<button class="btn rarity-Rare" ng-click="toggleRarity(2)" ng-class="{disabled: !rarityFilters[2]}">R</button>
 
 				<br class="small-phone" />
 				<br class="small-phone" />
 
-				<button class="btn first-faction" ng-click="toggleFaction('order')" ng-class="{disabled: !factionFilters['order']}">
+				<button class="btn first-button" ng-click="toggleFaction('order')" ng-class="{disabled: !factionFilters['order']}">
 					<img src="/img/card-icons/order.png" />
 				</button>
 				<button class="btn" ng-click="toggleFaction('growth')" ng-class="{disabled: !factionFilters['growth']}">
@@ -127,16 +136,15 @@
 						</a>
 					</th>
 					<th>
-						<a ng-click="changeSorting('price.buy')">Buy</a>
+						<a ng-click="changeSorting('price.buy.price')">Buy</a>
 					</th>
 					<th>
-						<a ng-click="changeSorting('price.sell')">Sell</a>
+						<a ng-click="changeSorting('price.sell.price')">Sell</a>
 					</th>
 					<th class="pop hidden-phone">Pop. (buy/sell)</th>
-					<th class="hidden-phone">Last Seen</th>
 				</tr>
 			</thead>
-			<tr ng-repeat="card in allCardData | orderBy:sort.column:sort.descending | filter:{name:searchTerm} | filter:cardRarity | filter:cardFaction" ng-click="details(card)">
+			<tr ng-repeat="card in allCardData | orderBy:sort.column:sort.descending | filter:{name:searchTerm} | filter:cardRarity | filter:cardFaction | filter:cardSet" ng-click="details(card)">
 				<td class="img">
 					<div class="card-image" id="simg-{{card.image}}"></div>
 				</td>
@@ -145,12 +153,9 @@
 					<span class="hidden-phone">{{rarityToText(card.rarity)}}</span>
 					<span class="visible-phone">{{rarityToText(card.rarity)[0]}}</span>
 				</td>
-				<td>{{prettyPrice(card.price.buy)}}</td>
-				<td>{{prettyPrice(card.price.sell)}}</td>
-				<td class="pop hidden-phone">{{card.price.buyPop}} / {{card.price.sellPop}}</td>
-				<td class="hidden-phone">
-					<span ng-bind-html-unsafe="dateFormat(card.price.lastseen)"></span>
-				</td>
+				<td>{{prettyPrice(card.price.buy.price)}}</td>
+				<td>{{prettyPrice(card.price.sell.price)}}</td>
+				<td class="pop hidden-phone">{{card.price.buy.pop}} / {{card.price.sell.pop}}</td>
 			</tr>
 		</table>
 	</div>
