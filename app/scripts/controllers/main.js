@@ -174,6 +174,10 @@ angular.module('scrollsguidepostFrontendApp')
 			$scope.setFilters[set] = !$scope.setFilters[set];
 		};
 
+		$scope.$on('$viewContentLoaded', function(){
+			angular.element('.form-search input').focus();
+		});
+
 		/*TODO this needs to be a directive*/
 		var el = document.getElementsByTagName('body')[0];
 		el.onkeydown = function(evt) {
