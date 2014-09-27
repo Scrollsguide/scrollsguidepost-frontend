@@ -17,7 +17,8 @@ angular.module('scrollsguidepostFrontendApp')
 
 				newCard.price = {
 					buy: { price: 0, pop: 0},
-					sell: { price: 0, pop: 0}
+					sell: { price: 0, pop: 0},
+					bm: { price: 0 }
 				};
 
 				$scope.prices.prices.forEach(function(priceData) {

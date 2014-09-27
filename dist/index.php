@@ -19,15 +19,7 @@
 	<!--<link rel="stylesheet" href="http://www.scrollsguide.com/style/navbar.css" type="text/css" />-->
     <link rel="stylesheet" href="" id="theme-stylesheet">
   </head>
-  <body ng-app="scrollsguidepostFrontendApp" ng-cloak="" ng-init="init()">
-<?php 
-/*
-    include "/var/www/sg/public_html/scripts/config.php";
-    include "/var/www/sg/public_html/scripts/functions.php";
-    echo navbar($links);
-	*/
- ?>
-
+  <body ng-app="scrollsguidepostFrontendApp" ng-cloak="">
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -60,7 +52,7 @@
     <script src="http://www.scrollsguide.com/js/bootstrap-dropdown.js"></script>
 	<!--<script src="http://www.scrollsguide.com/js/dropdown.js"></script>-->
 
-    <script src="scripts/069c3b0d.scripts.js"></script>
+    <script src="scripts/4f11b090.scripts.js"></script>
 
     <!--GA-->
     <script>

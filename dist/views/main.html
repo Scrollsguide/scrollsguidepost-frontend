@@ -142,6 +142,9 @@
 					<th>
 						<a ng-click="changeSorting('price.sell.price')">Sell</a>
 					</th>
+					<th>
+						<a ng-click="changeSorting('price.bm')"><abbr title="Black Market">BM</abbr></a>
+					</th>
 					<th class="pop hidden-phone">Pop. (buy/sell)</th>
 				</tr>
 			</thead>
@@ -157,6 +160,7 @@
 				</td>
 				<td>{{prettyPrice(card.price.buy.price)}}</td>
 				<td>{{prettyPrice(card.price.sell.price)}}</td>
+				<td>{{prettyPrice(card.price.bm.price)}}</td>
 				<td class="pop hidden-phone">{{card.price.buy.pop}} / {{card.price.sell.pop}}</td>
 			</tr>
 		</table>
